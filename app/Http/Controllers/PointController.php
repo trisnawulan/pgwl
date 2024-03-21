@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Points;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -32,17 +33,31 @@ class PointController extends Controller
      */
     public function store(Request $request) //memasukkan data ke database
     {
-        $data =[
-            'name' => $request->name,
-            'description' => $request->description,
-            'geom' => $request->geom
+        //validate request
+        $request->validate([
+            "name" => "required",
+            "geom" => "required"
+        ],
+        [
+            "name.required" => "Name is required",
+            "geom.required" => "Geometry is required"
+        ]);
+
+        $data = [
+            "name" => $request->name,
+            "description" => $request->description,
+            "geom" => $request->geom
         ];
 
         //create point
-        $this->point->create($data);
+        if(!$this->point->create($data)){
+            return redirect()->back()->with('error', 'Failed to create point');
+        }
+
+
 
         //redirect to map
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Point created successfully');
 
         //dd($data); //dd untuk debug data apakah sesuai dengan input
 
