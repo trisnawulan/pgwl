@@ -80,7 +80,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
-                            <textarea class="form-control" id="geom" name="geom" rows="3" readonly></textarea>
+                            <textarea class="form-control" id="geom_polyline" name="geom" rows="3" readonly></textarea>
                         </div>
 
                 </div>
@@ -140,7 +140,7 @@
 
             if (type === 'polyline') {
                 //Set value geometry to input geom
-                $("#geom").val(objectGeometry);
+                $("#geom_polyline").val(objectGeometry);
 
                 //Show modal
                 $("#PolylineModal").modal('show');
