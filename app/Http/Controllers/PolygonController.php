@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Polygons;
 use Illuminate\Http\Request;
 
 class PolygonController extends Controller
 {
+    public function __construct()
+    {
+        $this->polygon = new Polygons();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +33,30 @@ class PolygonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate request
+        $request->validate([
+            "name" => "required",
+            "geom" => "required"
+        ],
+        [
+            "name.required" => "Name is required",
+            "geom.required" => "Geometry is required"
+        ]);
+
+        $data = [
+            "name" => $request->name,
+            "description" => $request->description,
+            "geom" => $request->geom
+        ];
+
+        //create polygons
+        if(!$this->polygon->create($data)){
+            return redirect()->back()->with('error', 'Failed to create Polygon');
+        }
+
+        //redirect to map
+        return redirect()->back()->with('success', 'Polygon created successfully');
+
     }
 
     /**

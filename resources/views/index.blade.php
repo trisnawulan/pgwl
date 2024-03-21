@@ -44,7 +44,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
-                            <textarea class="form-control" id="geom" name="geom" rows="3" readonly></textarea>
+                            <textarea class="form-control" id="geom_point" name="geom" rows="3" readonly></textarea>
                         </div>
 
                 </div>
@@ -66,7 +66,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store-point') }}" method="POST">
+                    <form action="{{ route('store-polyline') }}" method="POST">
                         @csrf
 
                         <div class="mb-3">
@@ -81,6 +81,41 @@
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
                             <textarea class="form-control" id="geom_polyline" name="geom" rows="3" readonly></textarea>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Create Polygon-->
+    <div class="modal fade" id="PolygonModal" tabindex="-1" aria-labelledby="PolygonModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PolygonModalLabel">Create Polygon</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('store-polygon') }}" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Fill poit name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="geom" class="form-label">Geometry</label>
+                            <textarea class="form-control" id="geom_polygon" name="geom" rows="3" readonly></textarea>
                         </div>
 
                 </div>
@@ -147,11 +182,15 @@
 
 
             } else if (type === 'polygon' || type === 'rectangle') {
-                console.log("Create " + type);
+                //Set value geometry to input geom
+                $("#geom_polygon").val(objectGeometry);
+
+                //Show modal
+                $("#PolygonModal").modal('show');
 
             } else if (type === 'marker') {
                 //Set value geometry to input geom
-                $("#geom").val(objectGeometry);
+                $("#geom_point").val(objectGeometry);
 
                 //Show modal
                 $("#PointModal").modal('show');

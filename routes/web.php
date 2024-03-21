@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\PolylineController;
+use App\Http\Controllers\PolygonController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,12 @@ Route::get('/table', [MapController::class, 'table'])->name('table');
 
 //creat point, post untuk ngirim data
 Route::post('/store-point', [PointController::class, 'store'])->name('store-point');
+
+//creat polyline
+Route::post('/store-polyline', [PolylineController::class, 'store'])->name('store-polyline');
+
+//creat polygon
+Route::post('/store-polygon', [PolygonController::class, 'store'])->name('store-polygon');
 
 Route::get('/about', function () {
     return view('about');
