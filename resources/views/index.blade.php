@@ -22,11 +22,47 @@
     <div id="map"></div>
 
     <!-- Modal Create Point-->
-    <div class="modal fade" id="PointModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PointModal" tabindex="-1" aria-labelledby="PointModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="PointModalLabel">Create Point</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('store-point') }}" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Fill poit name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="geom" class="form-label">Geometry</label>
+                            <textarea class="form-control" id="geom" name="geom" rows="3" readonly></textarea>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Create Polyline-->
+    <div class="modal fade" id="PolylineModal" tabindex="-1" aria-labelledby="PolylineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PolylineModalLabel">Create Polyline</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -103,9 +139,16 @@
             console.log(objectGeometry);
 
             if (type === 'polyline') {
-                console.log("Create " + type);
+                //Set value geometry to input geom
+                $("#geom").val(objectGeometry);
+
+                //Show modal
+                $("#PolylineModal").modal('show');
+
+
             } else if (type === 'polygon' || type === 'rectangle') {
                 console.log("Create " + type);
+
             } else if (type === 'marker') {
                 //Set value geometry to input geom
                 $("#geom").val(objectGeometry);
