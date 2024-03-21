@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('table_points', function (Blueprint $table) { //membuat sebuah tabel baru di dalam database. Nama tabelnya adalah 'table_points'
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->geometry('geom', 4326);
             $table->timestamps(); //menambahkan dua kolom created_at dan updated_at
         });
