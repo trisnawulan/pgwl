@@ -201,16 +201,75 @@
             drawnItems.addLayer(layer);
         });
 
-        // var marker = L.marker([51.5, -0.09]).addTo(map);
+        /* GeoJSON Point */
+        var point = L.geoJson(null, {
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Name: " + feature.properties.name + "<br>" +
+                    "Description: " + feature.properties.description;
+                layer.on({
+                    click: function(e) {
+                        point.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        point.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.points') }}", function(data) {
+            point.addData(data);
+            map.addLayer(point);
+        });
 
-        // var popup = L.popup()
-        //     .setLatLng([51.513, -0.09])
-        //     .setContent("I am a standalone popup.")
-        //     .openOn(map);
 
-        // marker
-        // L.marker([51.505, -0.09], 13)
-        // .bindPopup('Monas')
-        // .openPopup();
+        /* GeoJSON Polyline */
+        var polyline = L.geoJson(null, {
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Name: " + feature.properties.name + "<br>" +
+                    "Description: " + feature.properties.description;
+                layer.on({
+                    click: function(e) {
+                        point.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        point.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.polylines') }}", function(data) {
+            polyline.addData(data);
+            map.addLayer(polyline);
+        });
+
+
+        /* GeoJSON Polygon */
+        var polygon = L.geoJson(null, {
+            onEachFeature: function(feature, layer) {
+                var popupContent = "Name: " + feature.properties.name + "<br>" +
+                    "Description: " + feature.properties.description;
+                layer.on({
+                    click: function(e) {
+                        point.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        point.bindTooltip(feature.properties.kab_kota);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.polygons') }}", function(data) {
+            polygon.addData(data);
+            map.addLayer(polygon);
+        });
+
+        //layer control
+        var overlayMaps = {
+            "Point": point,
+            "Polyline": polyline,
+            "Polygon": polygon
+        };
+
+        var layerControl = L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
     </script>
 @endsection

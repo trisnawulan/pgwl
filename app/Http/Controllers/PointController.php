@@ -17,7 +17,26 @@ class PointController extends Controller
      */
     public function index() //menampilkan seluruh
     {
-        //
+        $points = $this->point->points(); //memanggil fuction points di model atau mengambil seluruh data titik dari basis data.
+        //dd($points); // cek data
+        foreach($points as $p){ //perulangan
+            $feature[] = [
+                'type' => 'Feature',
+                'geometry' => json_decode($p->geom), //mengubah string json jadi variabel php agar mudah dibaca.
+                'properties'=> [
+                    'name' => $p->name,
+                    'description'=> $p->description,
+                    'created_at' => $p->created_at,
+                    'updated_at' => $p->updated_at
+                ]
+                ];
+        }
+
+
+        return response()->json([
+            'type' => 'FeatureCollection',
+            'features' => $feature,
+        ]); //menampilkan atau ngambil data dari points dalam format json
     }
 
     /**

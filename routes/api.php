@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\PolygonController;
+use App\Http\Controllers\PolylineController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+//create point
+Route::get('/points', [PointController::class, 'index'])->name('api.points');
+
+//create polyline
+Route::get('/polylines', [PolylineController::class, 'index'])->name('api.polylines');
+
+//create polygon
+Route::get('/polygons', [PolygonController::class, 'index'])->name('api.polygons');

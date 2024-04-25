@@ -17,7 +17,26 @@ class PolygonController extends Controller
      */
     public function index()
     {
-        //
+        $polygons = $this->polygon->polygons(); //memanggil fuction points di model.
+        //dd($points); // cek data
+        foreach($polygons as $p){ //perulangan
+            $feature[] = [
+                'type' => 'Feature',
+                'geometry' => json_decode($p->geom), //mengubah string json jadi variabel php agar mudah dibaca.
+                'properties'=> [
+                    'name' => $p->name,
+                    'description'=> $p->description,
+                    'created_at' => $p->created_at,
+                    'updated_at' => $p->updated_at
+                ]
+                ];
+        }
+
+
+        return response()->json([
+            'type' => 'FeatureCollection',
+            'features' => $feature,
+        ]);
     }
 
     /**
