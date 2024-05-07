@@ -30,7 +30,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store-point') }}" method="POST">
+                    <form action="{{ route('store-point') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -46,7 +46,10 @@
                             <label for="geom" class="form-label">Geometry</label>
                             <textarea class="form-control" id="geom_point" name="geom" rows="3" readonly></textarea>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image_point" name="image">
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -66,7 +69,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store-polyline') }}" method="POST">
+                    <form action="{{ route('store-polyline') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -82,6 +85,10 @@
                             <label for="geom" class="form-label">Geometry</label>
                             <textarea class="form-control" id="geom_polyline" name="geom" rows="3" readonly></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image_polyline" name="image">
+                        </div>
 
                 </div>
                 <div class="modal-footer">
@@ -92,6 +99,7 @@
             </div>
         </div>
     </div>
+
     <!-- Modal Create Polygon-->
     <div class="modal fade" id="PolygonModal" tabindex="-1" aria-labelledby="PolygonModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -101,7 +109,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store-polygon') }}" method="POST">
+                    <form action="{{ route('store-polygon') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -116,6 +124,10 @@
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
                             <textarea class="form-control" id="geom_polygon" name="geom" rows="3" readonly></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image_polygon" name="image">
                         </div>
 
                 </div>
@@ -205,13 +217,14 @@
         var point = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description;
+                    "Description: " + feature.properties.description + "<br>" +
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
                 layer.on({
                     click: function(e) {
                         point.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        point.bindTooltip(feature.properties.kab_kota);
+                        point.bindTooltip(feature.properties.name);
                     },
                 });
             },
@@ -226,13 +239,14 @@
         var polyline = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description;
+                    "Description: " + feature.properties.description + "<br>" +
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
                 layer.on({
                     click: function(e) {
-                        point.bindPopup(popupContent);
+                        polyline.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        point.bindTooltip(feature.properties.kab_kota);
+                        polyline.bindTooltip(feature.properties.kab_kota);
                     },
                 });
             },
@@ -247,13 +261,14 @@
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description;
+                    "Description: " + feature.properties.description + + "<br>" +
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
                 layer.on({
                     click: function(e) {
-                        point.bindPopup(popupContent);
+                        polygon.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        point.bindTooltip(feature.properties.kab_kota);
+                        polygon.bindTooltip(feature.properties.kab_kota);
                     },
                 });
             },
@@ -270,6 +285,8 @@
             "Polygon": polygon
         };
 
-        var layerControl = L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);
+        var layerControl = L.control.layers(null, overlayMaps, {
+            collapsed: false
+        }).addTo(map);
     </script>
 @endsection
