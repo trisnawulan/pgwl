@@ -261,7 +261,7 @@
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + + "<br>" +
+                    "Description: " + feature.properties.description +"<br>" +
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
                 layer.on({
                     click: function(e) {

@@ -11,14 +11,13 @@ class PolygonController extends Controller
     {
         $this->polygon = new Polygons();
     }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $polygons = $this->polygon->polygons(); //memanggil fuction points di model.
-        //dd($points); // cek data
+        $polygons = $this->polygon->polygons();
+        
         foreach($polygons as $p){ //perulangan
             $feature[] = [
                 'type' => 'Feature',
@@ -66,6 +65,7 @@ class PolygonController extends Controller
             'image.max' => 'Image must not exceed 10MB'
         ]);
 
+
         // create folder images
         if (!is_dir('storage/images')) {
             mkdir('storage/images', 0777);
@@ -74,7 +74,7 @@ class PolygonController extends Controller
         //upload image
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = time() . "_point." . $image->getClientOriginalExtension();
+            $filename = time() . "_polygon." . $image->getClientOriginalExtension();
             $image->move('storage/images', $filename);
         } else {
             $filename = null;
@@ -84,8 +84,7 @@ class PolygonController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'geom' => $request->geom,
-            'image' => $request->image
-
+            'image' => $filename
         ];
 
         //create polygons
