@@ -17,12 +17,13 @@ class PolygonController extends Controller
     public function index()
     {
         $polygons = $this->polygon->polygons();
-        
+
         foreach($polygons as $p){ //perulangan
             $feature[] = [
                 'type' => 'Feature',
                 'geometry' => json_decode($p->geom), //mengubah string json jadi variabel php agar mudah dibaca.
                 'properties'=> [
+                    'id'=>$p->id,
                     'name' => $p->name,
                     'description'=> $p->description,
                     'image' => $p->image,
@@ -126,6 +127,31 @@ class PolygonController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //get image
+        $image = $this->polygon->find($id)->image;
+
+
+
+        //delete polygon
+        if (!$this->polygon->destroy($id)) {
+            return redirect()->back()->with('error', 'Failed to delete polygon');
+        }
+
+        //delete image
+        if ($image != null) {
+            unlink('storage/images/' . $image);
+        }
+
+        //redirect to map
+        return redirect()->back()->with('success', 'polygon deleted successfully');
+    }
+
+    public function table() {
+        $polygons = $this->polygon->all();
+        $data = [
+            'title' => 'Table Polygon',
+            'polygons' => $polygons
+        ];
+        return view('table-polygon', $data);
     }
 }

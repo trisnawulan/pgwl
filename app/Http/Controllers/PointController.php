@@ -23,6 +23,7 @@ class PointController extends Controller
                 'type' => 'Feature',
                 'geometry' => json_decode($p->geom),
                 'properties' => [
+                    'id'=>$p->id,
                     'name' => $p->name,
                     'description' => $p->description,
                     'image' => $p->image,
@@ -132,6 +133,32 @@ class PointController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //get image
+        $image = $this->point->find($id)->image;
+
+
+
+        //delete point
+        if (!$this->point->destroy($id)) {
+            return redirect()->back()->with('error', 'Failed to delete point');
+        }
+
+        //delete image
+        if ($image != null) {
+            unlink('storage/images/' . $image);
+        }
+
+        //redirect to map
+        return redirect()->back()->with('success', 'Point deleted successfully');
     }
+
+    public function table() {
+        $points = $this->point->all();
+        $data = [
+            'title' => 'Table Point',
+            'points' => $points
+        ];
+        return view('table-point', $data);
+    }
+
 }

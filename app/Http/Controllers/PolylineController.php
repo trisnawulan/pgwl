@@ -23,6 +23,7 @@ class PolylineController extends Controller
                 'type' => 'Feature',
                 'geometry' => json_decode($p->geom),
                 'properties' => [
+                    'id'=>$p->id,
                     'name' => $p->name,
                     'description' => $p->description,
                     'image' => $p->image,
@@ -126,6 +127,31 @@ class PolylineController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //get image
+        $image = $this->polyline->find($id)->image;
+
+
+
+        //delete polyline
+        if (!$this->polyline->destroy($id)) {
+            return redirect()->back()->with('error', 'Failed to delete polyline');
+        }
+
+        //delete image
+        if ($image != null) {
+            unlink('storage/images/' . $image);
+        }
+
+        //redirect to map
+        return redirect()->back()->with('success', 'Polyline deleted successfully');
+    }
+
+    public function table() {
+        $polylines = $this->polyline->all();
+        $data = [
+            'title' => 'Table Polyline',
+            'polylines' => $polylines
+        ];
+        return view('table-polyline', $data);
     }
 }

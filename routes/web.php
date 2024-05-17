@@ -23,12 +23,18 @@ Route::get('/table', [MapController::class, 'table'])->name('table');
 
 //creat point, post untuk ngirim data
 Route::post('/store-point', [PointController::class, 'store'])->name('store-point');
+//Delete Point
+Route::delete('delete-point/{id}', [PointController::class, 'destroy'])->name('delete-point');
 
 //creat polyline
 Route::post('/store-polyline', [PolylineController::class, 'store'])->name('store-polyline');
+//Delete Polyline
+Route::delete('delete-polyline/{id}', [PolylineController::class, 'destroy'])->name('delete-polyline');
 
 //creat polygon
 Route::post('/store-polygon', [PolygonController::class, 'store'])->name('store-polygon');
+//Delete Polygon
+Route::delete('delete-polygon/{id}', [PolygonController::class, 'destroy'])->name('delete-polygon');
 
 Route::get('/about', function () {
     return view('about');
@@ -43,5 +49,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//table
+Route::get('/table-point', [PointController::class, 'table'])->name('table-point');
+
+//table
+Route::get('/table-polyline', [PolylineController::class, 'table'])->name('table-polyline');
+
+//table
+Route::get('/table-polygon', [PolygonController::class, 'table'])->name('table-polygon');
 
 require __DIR__.'/auth.php';

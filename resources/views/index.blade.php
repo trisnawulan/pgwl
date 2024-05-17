@@ -48,7 +48,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image_point" name="image">
+                            <input type="file" class="form-control" id="image_point" name="image"
+                                onchange="document.getElementById('preview-image-point').src = window.URL.createObjectURL(this.files[0])">
+                        </div>
+                        <div class="mb-3">
+                            <img src="" alt="Preview" id="preview-image-point" class="img-thumbnail"
+                                width="400">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -87,7 +92,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image_polyline" name="image">
+                            <input type="file" class="form-control" id="image_polyline" name="image"
+                                onchange="document.getElementById('preview-image-polyline').src = window.URL.createObjectURL(this.files[0])">
+                        </div>
+                        <div class="mb-3">
+                            <img src="" alt="Preview" id="preview-image-polyline" class="img-thumbnail"
+                                width="400">
                         </div>
 
                 </div>
@@ -127,7 +137,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image_polygon" name="image">
+                            <input type="file" class="form-control" id="image_polygon" name="image"
+                                onchange="document.getElementById('preview-image-polygon').src = window.URL.createObjectURL(this.files[0])">
+                        </div>
+                        <div class="mb-3">
+                            <img src="" alt="Preview" id="preview-image-polygon" class="img-thumbnail"
+                                width="400">
                         </div>
 
                 </div>
@@ -218,7 +233,15 @@
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+
+                    "<form action='{{ url('delete-point') }}/" + feature.properties.id + "' method='POST'>" +
+                    '{{ csrf_field() }}' +
+                    '{{ method_field('DELETE') }}' +
+
+                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                    "</form>";
                 layer.on({
                     click: function(e) {
                         point.bindPopup(popupContent);
@@ -240,7 +263,15 @@
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+
+                    "<form action='{{ url('delete-polyline') }}/" + feature.properties.id + "' method='POST'>" +
+                    '{{ csrf_field() }}' +
+                    '{{ method_field('DELETE') }}' +
+
+                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                    "</form>";
                 layer.on({
                     click: function(e) {
                         polyline.bindPopup(popupContent);
@@ -261,9 +292,19 @@
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description +"<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' class='img-thumbnail' alt='...'>";
-                layer.on({
+                    "Description: " + feature.properties.description + "<br>" +
+                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+
+                    "<form action='{{ url('delete-point') }}/" + feature.properties.id + "' method='POST'>" +
+                    '{{ csrf_field() }}' +
+                    '{{ method_field('DELETE') }}' +
+
+                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                    "</form>";
+
+
+                    layer.on({
                     click: function(e) {
                         polygon.bindPopup(popupContent);
                     },
