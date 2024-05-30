@@ -236,12 +236,17 @@
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>" +
 
+                    "<div class='d-flex flex-row'>" +
+                    "<a href='{{ url('edit-point') }}/" + feature.properties.id +
+                    "' class='btn btn-sm btn-warning me-2'><i class='fa-solid fa-edit'></i></a>" +
+
                     "<form action='{{ url('delete-point') }}/" + feature.properties.id + "' method='POST'>" +
                     '{{ csrf_field() }}' +
                     '{{ method_field('DELETE') }}' +
 
                     "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+                    "</form>" +
+                    "</div>";
                 layer.on({
                     click: function(e) {
                         point.bindPopup(popupContent);
@@ -262,16 +267,21 @@
         var polyline = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                "Description: " + feature.properties.description + "<br>" +
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>" +
+
+                    "<div class='d-flex flex-row'>" +
+                    "<a href='{{ url('edit-polyline') }}/" + feature.properties.id +
+                    "' class='btn btn-sm btn-warning me-2'><i class='fa-solid fa-edit'></i></a>" +
 
                     "<form action='{{ url('delete-polyline') }}/" + feature.properties.id + "' method='POST'>" +
                     '{{ csrf_field() }}' +
                     '{{ method_field('DELETE') }}' +
 
                     "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+                    "</form>" +
+                    "</div>";
                 layer.on({
                     click: function(e) {
                         polyline.bindPopup(popupContent);
@@ -292,19 +302,24 @@
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                "Description: " + feature.properties.description + "<br>" +
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>" +
 
-                    "<form action='{{ url('delete-point') }}/" + feature.properties.id + "' method='POST'>" +
+                    "<div class='d-flex flex-row'>" +
+                    "<a href='{{ url('edit-polygon') }}/" + feature.properties.id +
+                    "' class='btn btn-sm btn-warning me-2'><i class='fa-solid fa-edit'></i></a>" +
+
+                    "<form action='{{ url('delete-polygon') }}/" + feature.properties.id + "' method='POST'>" +
                     '{{ csrf_field() }}' +
                     '{{ method_field('DELETE') }}' +
 
                     "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+                    "</form>" +
+                    "</div>";
 
 
-                    layer.on({
+                layer.on({
                     click: function(e) {
                         polygon.bindPopup(popupContent);
                     },

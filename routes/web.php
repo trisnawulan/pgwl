@@ -25,16 +25,23 @@ Route::get('/table', [MapController::class, 'table'])->name('table');
 Route::post('/store-point', [PointController::class, 'store'])->name('store-point');
 //Delete Point
 Route::delete('delete-point/{id}', [PointController::class, 'destroy'])->name('delete-point');
+//Edit Point
+Route::get('edit-point/{id}', [PointController::class, 'edit'])->name('edit-point');
 
 //creat polyline
 Route::post('/store-polyline', [PolylineController::class, 'store'])->name('store-polyline');
 //Delete Polyline
 Route::delete('delete-polyline/{id}', [PolylineController::class, 'destroy'])->name('delete-polyline');
+//Edit polyline
+Route::get('edit-polyline/{id}', [PolylineController::class, 'edit'])->name('edit-polyline');
 
 //creat polygon
 Route::post('/store-polygon', [PolygonController::class, 'store'])->name('store-polygon');
 //Delete Polygon
 Route::delete('delete-polygon/{id}', [PolygonController::class, 'destroy'])->name('delete-polygon');
+//Edit polygon
+Route::get('edit-polygon/{id}', [PolygonController::class, 'edit'])->name('edit-polygon');
+
 
 Route::get('/about', function () {
     return view('about');

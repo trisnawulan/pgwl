@@ -109,7 +109,28 @@ class PointController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $point = $this->point->point($id);
+
+        foreach ($point as $p) {
+            $feature[] = [
+                'type' => 'Feature',
+                'geometry' => json_decode($p->geom),
+                'properties' => [
+                    'id'=>$p->id,
+                    'name' => $p->name,
+                    'description' => $p->description,
+                    'image' => $p->image,
+                    'created_at' => $p->created_at,
+                    'updated_at' => $p->updated_at
+                ]
+            ];
+        }
+
+        return response()->json([
+            'type' => 'FeatureCollection',
+            'features' => $feature,
+        ]);
+
     }
 
     /**
@@ -117,7 +138,15 @@ class PointController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $point =$this->point->find($id);
+
+        $data =[
+            'title' => 'Edit Point',
+            'point' => $point,
+            'id' => $id
+        ];
+
+        return view('edit-point', $data);
     }
 
     /**
