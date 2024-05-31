@@ -30,9 +30,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store-point') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('update-point', $id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        @method('PATCH')
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
@@ -50,6 +50,9 @@
                             <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-control" id="image_point" name="image"
                                 onchange="document.getElementById('preview-image-point').src = window.URL.createObjectURL(this.files[0])">
+
+                                <input type="hidden" class="form-control" id="image_old" nama="image_old">
+
                         </div>
                         <div class="mb-3">
                             <img src="" alt="Preview" id="preview-image-point" class="img-thumbnail"
@@ -69,8 +72,8 @@
 
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-    <script src="https://unpkg.com/terraformer@1.0.7/terraformer.js"></script>
-    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2/terraformer-wkt-parser.js"></script>
+    <script src="https://unpkg.com/@terraformer/wkt"></script>
+
     <script>
         // map
         var map = L.map('map').setView([-7.7715537, 110.2952981], 13);
@@ -104,14 +107,16 @@
 
         map.on('draw:edited', function(e) {
             var layer = e.layers;
-            var geojson = layer.toGeoJSON();
-
-            console.log(geojson);
 
             layer.eachLayer(function(layer){
+                var geojson = layer.toGeoJSON();
+
+                var wkt = Terraformer.geojsonToWKT(geojson.geometry);
+            // console.log(geojson); Mendebug keluaran data
                 $('#name').val(layer.feature.properties.name);
                 $('#description').val(layer.feature.properties.description);
-                $('#geom_point').val(layer.toGeoJSON().geometry.coordinates);
+                $('#geom_point').val(wkt);
+                $('#image_old').val(layer.feature.properties.image);
                 $('#preview-image-point').attr('src', '{{ asset('storage/images/') }}/' + layer.feature.properties.image);
                 $('#PointModal').modal('show');
 
@@ -128,20 +133,9 @@
 
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+                    "Photo: <br><img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    "' class='img-thumbnail' alt='' width='200'>";
 
-                    "<div class='d-flex flex-row'>" +
-                    "<a href='{{ url('edit-point') }}/" + feature.properties.id +
-                    "' class='btn btn-sm btn-warning me-2'><i class='fa-solid fa-edit'></i></a>" +
-
-                    "<form action='{{ url('delete-point') }}/" + feature.properties.id + "' method='POST'>" +
-                    '{{ csrf_field() }}' +
-                    '{{ method_field('DELETE') }}' +
-
-                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>" +
-                    "</div>";
                 layer.on({
                     click: function(e) {
                         point.bindPopup(popupContent);

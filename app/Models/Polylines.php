@@ -12,11 +12,15 @@ class Polylines extends Model
 
     protected $table = 'table_polylines';
 
-    protected $guarded = ['id']; // yg tidak boleh dibuah hanya id, lainya bisa
+    protected $guarded = ['id'];
 
     public function polylines()
     {
         return $this->select(DB::raw('id, name, description, image, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->get();
     }
-
+    public function polyline($id)
+    {
+        return $this->select(DB::raw('id, name, description, image, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))
+        -> where('id', $id)->get();
+    }
 }

@@ -12,8 +12,15 @@ class MapController extends Controller
             "title"=> "Petaku"
         ];
 
-        return view('index', $data); //Digunakan untuk memanggil view index (file view index.blade.php)
+        if (auth()->check()) {
+            return view('index', $data);
+        } else {
+            return view('index-public', $data);
+        }
     }
+        //return view('index', $data);
+        //Digunakan untuk memanggil view index (file view index.blade.php)
+
 
     public function table()
     {

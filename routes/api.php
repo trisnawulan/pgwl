@@ -32,3 +32,4 @@ Route::get('/polyline/{id}', [PolylineController::class, 'show'])->name('api.pol
 
 //create polygon
 Route::get('/polygons', [PolygonController::class, 'index'])->name('api.polygons');
+Route::get('/polygon/{id}', [PolygonController::class, 'show'])->name('api.polygon');

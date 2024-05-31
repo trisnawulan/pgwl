@@ -69,12 +69,6 @@ class PointController extends Controller
                 'image.max' => 'Image must not exceed 10MB'
             ]
         );
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'geom' => $request->geom,
-            'image' => $request->image
-        ];
 
         // create folder images
         if (!is_dir('storage/images')) {
@@ -154,8 +148,55 @@ class PointController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //Validate data
+        $request->validate(
+            [
+                'name' => 'required',
+                'geom' => 'required',
+                'image' => 'mimes:jpeg,jpg,png,gif, tiff|max:10000' // 10MB
+            ],
+            [
+                'name.required' => 'Name is required',
+                'geom.required' => 'Location is required',
+                'image.mimes' => 'Image must be a file of type: jpg, jpeg, png, tiff, gif',
+                'image.max' => 'Image must not exceed 10MB'
+            ]
+        );
+
+        // update folder images
+        if (!is_dir('storage/images')) {
+            mkdir('storage/images', 0777);
+        }
+
+        //upload image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . "_point." . $image->getClientOriginalExtension();
+            $image->move('storage/images', $filename);
+
+            //de;ete image
+            $image_old =$request->image_old;
+            if ($image_old !=null){
+                unlink('storage/images/' . $image_old);
+            }
+        } else {
+            $filename = $request->image_old;
+        }
+
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'geom' => $request->geom,
+            'image' => $filename
+        ];
+        //update point
+        if (!$this->point->find($id)->update($data)) {
+            return redirect()->back()->with('error', 'failed to update point');
+        }
+        //redirect to Map
+        return redirect()->back()->with('success', 'point updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
