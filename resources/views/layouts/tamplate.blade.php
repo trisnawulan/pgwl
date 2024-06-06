@@ -89,7 +89,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        Nama : Trisna Diah Ayu
+                        Nama : Trisna Diah Ayu Wulandari
                     </p>
                     <p>
                         NIM : 22/505883/Sv/21979
