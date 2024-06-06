@@ -35,19 +35,26 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('index') }}"><i
                                 class="fa-solid fa-house"></i> Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {{ route('table') }}"><i class="fa-solid fa-table"></i> Table</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fa-solid fa-table"></i>
+                            Tabel
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href=" {{ route('table-point') }}">Point</a></li>
+                            <li><a class="dropdown-item" href=" {{ route('table-polyline') }}">Polyline</a></li>
+                            <li><a class="dropdown-item" href=" {{ route('table-polygon') }}">polygon</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-circle-info"></i> Info</a>
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#infoModal"><i class="fa-solid fa-circle-info"></i> Info</a>
                     </li>
 
 
 
                     @if (Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard') }}"><i
-                                class="fa-solid fa-gauge"></i>
+                            <a class="nav-link" href="{{ route('dashboard') }}"><i class="fa-solid fa-gauge"></i>
                                 Dashboard</a>
                         </li>
                         <form method="POST" action="{{ route('logout') }}">
@@ -71,6 +78,29 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Nama : Trisna Diah Ayu
+                    </p>
+                    <p>
+                        NIM : 22/505883/Sv/21979
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @yield('content')
 
