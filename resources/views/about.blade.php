@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Ini halaman about, praktikum PGWL</h1>
+    <h1>Kabupaten Blora</h1>
 </body>
 </html>
