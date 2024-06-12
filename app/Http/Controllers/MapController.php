@@ -18,6 +18,18 @@ class MapController extends Controller
             return view('index-public', $data);
         }
     }
+    public function map() //(funtion index atau sbg method)
+    {
+        $data = [
+            "title"=> "Petaku"
+        ];
+
+        if (auth()->check()) {
+            return view('index', $data);
+        } else {
+            return view('map-public', $data);
+        }
+    }
         //return view('index', $data);
         //Digunakan untuk memanggil view index (file view index.blade.php)
 

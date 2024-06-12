@@ -163,7 +163,7 @@
     <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2/terraformer-wkt-parser.js"></script>
     <script>
         // map
-        var map = L.map('map').setView([-7.7715537, 110.2952981], 13);
+        var map = L.map('map').setView([-7.7605283, 110.375388], 17);
         // layer
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -340,6 +340,7 @@
             "Polyline": polyline,
             "Polygon": polygon
         };
+
 
         var layerControl = L.control.layers(null, overlayMaps, {
             collapsed: false

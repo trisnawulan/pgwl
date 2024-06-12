@@ -23,6 +23,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [MapController::class, 'index'])->name('index');
 Route::get('/table', [MapController::class, 'table'])->name('table');
+Route::get('/map', [MapController::class, 'map'])->name('map-public');
+
 
 //creat point, post untuk ngirim data
 Route::post('/store-point', [PointController::class, 'store'])->name('store-point');
