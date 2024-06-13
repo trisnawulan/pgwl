@@ -18,5 +18,5 @@ Sumber data yang digunakan yaitu dari google maps yang menampilkan daerah Pogung
 
 Tangkapan layar komponen:  
 </h4> 
-![Halaman landing](image.png)
-![Halaman Peta](image-1.png)
+![Halaman landing](/image.png)
+![Halaman Peta](/image-1.png)
