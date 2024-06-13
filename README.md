@@ -1,7 +1,7 @@
 <h1> LABIRIN POGUNG <h1>
 
 
-
+<h4>
 Komponen pembangun :   
 1. Data shapefile administrasi Kecamatan.
 2. Data statistik luas kecamatan, jumlah penduduk, jumlah fasilitas kesehatan, kondisi jalan, dan jumlah koprasi.
@@ -30,3 +30,4 @@ Tangkapan layar komponen:
 <div align="center">
   <img src="foto_hasil/4.png" alt="Gambar 4" width="400"/>
 </div>
+</h4>
