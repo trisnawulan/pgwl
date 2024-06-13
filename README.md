@@ -3,15 +3,16 @@
 
 <h4>
 Komponen pembangun :   
-1. Data shapefile administrasi Kecamatan.
-2. Data statistik luas kecamatan, jumlah penduduk, jumlah fasilitas kesehatan, kondisi jalan, dan jumlah koprasi.
-3. Data persebaran lokasi penginapan di Kabupaten blora
+<ol>
+<li>Laravel</li>
+<li>Bootstrap</li>
+<li>Font Awesome</li>
+<li>QGIS</li>
+<li>Dbeaver</li>
+<li>Postgres</li>
+</ol>
 
-Sumber data:   
-1. https://tanahair.indonesia.go.id/
-2. https://blorakab.bps.go.id/
-3. https://www.blorakab.go.id/
-4. https://www.traveloka.com/
+Sumber data yang digunakan yaitu dari google maps yang menampilkan daerah Pogung
 
 
 Tangkapan layar komponen:   
