@@ -16,10 +16,12 @@ Sumber data:
 
 Tangkapan layar komponen:   
 <div align="center">
-  <img src="storage/images/landing.jpeg" alt="Gambar 1" width="400"/>
+  <img src="storage/images/landing.jpeg" alt="landing" width="400"/>
 </div>
 
 <div align="center">
-  <img src="storage/images/peta.jpg" alt="Gambar 4" width="400"/>
+  <img src="storage/images/peta.jpg" alt="peta" width="400"/>
 </div>
+
+
 </h4>
