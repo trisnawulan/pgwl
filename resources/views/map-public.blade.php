@@ -144,6 +144,29 @@
             map.addLayer(polygon);
         });
 
+                /* Scale Bar */
+                L.control
+            .scale({
+                maxWidth: 150,
+                position: "bottomright",
+            })
+            .addTo(map);
+        // Image Watermark
+        L.Control.Watermark = L.Control.extend({
+            onAdd: function(map) {
+                var img2 = L.DomUtil.create("img");
+                img2.src = "storage/images/LOGO_SIG_BLUE.png";
+                img2.style.width = "150px";
+                return img2;
+            },
+        });
+        L.control.watermark = function(opts) {
+            return new L.Control.Watermark(opts);
+        };
+        L.control.watermark({
+            position: "bottomright"
+        }).addTo(map);
+
         //layer control
         var overlayMaps = {
             "Point": point,

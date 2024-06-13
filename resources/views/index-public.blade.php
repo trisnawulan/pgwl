@@ -112,7 +112,7 @@
         <div class="container">
             <div class="masthead-heading text-uppercase">Labirin Pogung</div>
             <div class="masthead-subheading">Pemberian informasi jalan alternatif ketika portal di Pogung ditutup</div>
-            <a class="btn btn-warning btn-xl text-uppercase" href="{{ route('map-public') }}">Lokasi</a>
+            <a class="btn btn-warning btn-xl text-uppercase" href="{{ route('map-public') }}">Map</a>
         </div>
     </header>
 
@@ -123,8 +123,38 @@
             <div class="text-center">
                 <h1 class="section-heading text-uppercase">Tentang</h1>
                 <h2 class="section-heading text-uppercase">Labirin Pogung</h2>
-                <h3 class="section-subheading text-muted">WebGIS Labirin Pogung adalah sebuah aplikasi web yang memungkinkan pengguna untuk memvisualisasikan dan berinteraksi dengan data spasial yang terkait dengan labirin Pogung. Sistem ini berguna untuk mencari jalan alternatif ketika portal masuk ke labirin ditutup atau tidak dapat diakses.</h3>
-            </div>
+                <h3 class="section-subheading text-muted">Pogung adalah sebuah kawasan yang terletak di dekat Universitas
+                    Gadjah Mada (UGM) di Yogyakarta, Indonesia. Kawasan ini dikenal sebagai salah satu daerah yang ramai dan
+                    hidup, terutama karena keberadaannya yang sangat dekat dengan kampus UGM, universitas terbesar dan
+                    tertua di Indonesia. Pogung menjadi tempat tinggal favorit bagi banyak mahasiswa UGM karena lokasinya
+                    yang strategis. Banyak kos-kosan dan asrama mahasiswa yang tersebar di seluruh kawasan ini, menawarkan
+                    berbagai pilihan tempat tinggal mulai dari yang sederhana hingga yang lebih eksklusif. Meskipun Pogung
+                    merupakan daerah yang ramai, lingkungan di sini relatif aman dan nyaman. Banyak jalan-jalan kecil yang
+                    memungkinkan penghuni untuk berjalan kaki atau bersepeda dengan tenang. Kawasan ini juga memiliki
+                    sejumlah ruang hijau yang bisa digunakan untuk bersantai atau berolahraga.</h3>
+                <h3 class="section-subheading text-muted">Pogung memang dikenal sebagai kawasan yang aman dan nyaman untuk ditinggali, terutama bagi mahasiswa.
+                    Salah satu fitur keamanan yang diterapkan di daerah ini adalah adanya portal jalan di setiap lorong atau
+                    jalan kecil. Portal ini biasanya ditutup pada jam 10 malam, yang membantu menjaga keamanan lingkungan
+                    dengan membatasi akses kendaraan dan orang yang tidak dikenal pada malam hari.
+                    Dengan adanya kebijakan penutupan portal jalan tersebut, seringkali penghuni atau pengunjung Pogung
+                    membutuhkan informasi mengenai rute alternatif. Untuk itu, pembuatan WebGIS (Sistem Informasi Geografis
+                    berbasis web) Labirin Pogung sangat berguna. Berikut adalah beberapa poin yang menjelaskan tujuan dan
+                    manfaat pembuatan WebGIS Labirin Pogung:</h3>
+                            </div>
+        <div>
+            <h2>Tujuan WebGIS Labirin Pogung</h2>
+            <ol>
+                <li><strong>Informasi jalan alternatif</strong></li>
+                    <p>Membantu penghuni dan pengunjung menemukan rute alternatif ketika portal jalan ditutup. Ini sangat bermanfaat bagi mereka yang harus keluar atau masuk kawasan Pogung setelah jam 10 malam. </p>
+                <li><strong>Meningkatkan Kemanan</strong></li>
+                    <p>Pengguna dapat menghindari jalan-jalan yang kurang aman atau tidak familiar. Ini membantu menjaga keselamatan mereka saat bepergian pada malam hari.</p>
+                <li><strong>Mempermudah Navigasi</strong></li>
+                    <p>Mempermudah pengguna dalam menavigasi area Pogung, terutama bagi mereka yang baru pertama kali mengunjungi kawasan ini atau yang belum familiar dengan semua jalan dan lorong.</p>
+                <li><strong>Efisiensi Waktu</strong></li>
+                    <p>pengguna dapat menghemat waktu dan mengurangi kebingungan saat mencari jalan di tengah malam.</p>
+            </ol>
+
+        </div>
             {{-- <div class="row text-center">
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
