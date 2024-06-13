@@ -26,7 +26,7 @@ class PointController extends Controller
                     'id'=>$p->id,
                     'name' => $p->name,
                     'description' => $p->description,
-                    // 'image' => $p->image,
+                    'image' => $p->image,
                     'created_at' => $p->created_at,
                     'updated_at' => $p->updated_at
                 ]
