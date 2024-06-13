@@ -14,8 +14,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Description</th>
-
-                            <th>Image</th>
+                            {{-- <th>Image</th> --}}
                             <th>Created at</th>
                         </tr>
                     </thead>
@@ -28,10 +27,9 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->name }}</td>
                                 <td>{{ $p->description }}</td>
-
-                                <td>
+                                {{-- <td>
                                     <img src="{{ asset('storage/images/' . $p->image) }}" alt="" width="200">
-                                </td>
+                                </td> --}}
                                 <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }} </td>
                             </tr>
                         @endforeach

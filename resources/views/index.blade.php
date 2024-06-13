@@ -170,6 +170,47 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
+        /* Tile Basemap */
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+            attribution: 'Map data ©️ <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        var basemap1 = L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="DIVSIGUGM" target="_blank">DIVSIG UGM</a>',
+            }
+        );
+
+        var basemap2 = L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+                attribution: 'Tiles &copy; Esri | <a href="Latihan WebGIS" target="_blank">DIVSIG UGM</a>',
+            }
+        );
+
+        var basemap3 = L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+                attribution: 'Tiles &copy; Esri | <a href="Lathan WebGIS" target="_blank">DIVSIG UGM</a>',
+            }
+        );
+
+        var basemap4 = L.tileLayer(
+            "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", {
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            }
+        );
+
+        basemap4.addTo(map);
+
+        var baseMaps = {
+            OpenStreetMap: basemap1,
+            "Esri World Street": basemap2,
+            "Esri Imagery": basemap3,
+            "Stadia Dark Mode": basemap4,
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+
         var drawnItems = new L.FeatureGroup();
         map.addLayer(drawnItems);
 
@@ -231,10 +272,10 @@
         /* GeoJSON Point */
         var point = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+                var popupContent = "No: " + feature.properties.name + "<br>" +
+                    "Lokasi: " + feature.properties.description + "<br>"+
+                    // "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    // "' class='img-thumbnail' alt='...'>" + "<br>" +
 
                     "<div class='d-flex flex-row'>" +
                     "<a href='{{ url('edit-point') }}/" + feature.properties.id +
@@ -266,10 +307,10 @@
         /* GeoJSON Polyline */
         var polyline = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>" +
+                var popupContent = "Nama: " + feature.properties.name + "<br>" +
+                "Lokasi: " + feature.properties.description + "<br>" +
+                    // "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
+                    // "' class='img-thumbnail' alt='...'>" + "<br>" +
 
                     "<div class='d-flex flex-row'>" +
                     "<a href='{{ url('edit-polyline') }}/" + feature.properties.id +
@@ -333,6 +374,29 @@
             polygon.addData(data);
             map.addLayer(polygon);
         });
+
+        /* Scale Bar */
+        L.control
+            .scale({
+                maxWidth: 150,
+                position: "bottomright",
+            })
+            .addTo(map);
+        // Image Watermark
+        L.Control.Watermark = L.Control.extend({
+            onAdd: function(map) {
+                var img2 = L.DomUtil.create("img");
+                img2.src = "storage/images/LOGO_SIG_BLUE.png";
+                img2.style.width = "150px";
+                return img2;
+            },
+        });
+        L.control.watermark = function(opts) {
+            return new L.Control.Watermark(opts);
+        };
+        L.control.watermark({
+            position: "bottomright"
+        }).addTo(map);
 
         //layer control
         var overlayMaps = {

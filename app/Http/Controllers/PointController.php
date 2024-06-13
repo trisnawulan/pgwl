@@ -26,7 +26,7 @@ class PointController extends Controller
                     'id'=>$p->id,
                     'name' => $p->name,
                     'description' => $p->description,
-                    'image' => $p->image,
+                    // 'image' => $p->image,
                     'created_at' => $p->created_at,
                     'updated_at' => $p->updated_at
                 ]
@@ -223,7 +223,7 @@ class PointController extends Controller
     }
 
     public function table() {
-        $points = $this->point->points(); 
+        $points = $this->point->points();
         $data = [
             'title' => 'Table Point',
             'points' => $points

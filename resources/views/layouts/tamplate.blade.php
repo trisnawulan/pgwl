@@ -35,7 +35,7 @@
       padding-bottom: 6rem;
       text-align: center;
       color: #fff;
-      background-image: url("storage/images/1714635899_point.jpg");
+      background-image: url("storage/images/pogung.jpg");
       background-repeat: no-repeat;
       background-attachment: scroll;
       background-position: center center;
@@ -214,7 +214,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('index') }}"><i
+                        <a class="nav-link active" aria-current="page" href="{{ route('index-public') }}"><i
                                 class="fa-solid fa-house"></i> Home</a>
                     </li>
                     <li class="nav-item dropdown">

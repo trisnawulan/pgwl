@@ -15,7 +15,7 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Coordinates</th>
-                            <th>Image</th>
+                            {{-- <th>Image</th> --}}
                             <th>Created at</th>
                         </tr>
                     </thead>
@@ -31,9 +31,9 @@
                                 <td>{{ $p->name }}</td>
                                 <td>{{ $p->description }}</td>
                                 <td>{{ $geometry->coordinates[1] . ',' . $geometry->coordinates[0] }}</td>
-                                <td>
+                                {{-- <td>
                                     <img src="{{ asset('storage/images/' . $p->image) }}" alt="" width="200">
-                                </td>
+                                </td> --}}
                                 <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }} </td>
                             </tr>
                         @endforeach

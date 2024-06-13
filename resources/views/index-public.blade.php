@@ -110,10 +110,8 @@
     <!-- Tampilan header-->
     <header class="masthead">
         <div class="container">
-            <div class="masthead-heading text-uppercase">Blora</div>
-            <div class="masthead-subheading">Ibu kota Blora adalah Kecamatan Blora. Kabupeten Blora berada di
-                bagian timur Jawa Tengah, yang bebatasan langsung dengan Provinsi Jawa Timur yaitu Kebupaten
-                Bojonegoro. Luas wilayah Kabupaten Blora 1.820,59 km persegi.</div>
+            <div class="masthead-heading text-uppercase">Labirin Pogung</div>
+            <div class="masthead-subheading">Pemberian informasi jalan alternatif ketika portal di Pogung ditutup</div>
             <a class="btn btn-warning btn-xl text-uppercase" href="{{ route('map-public') }}">Lokasi</a>
         </div>
     </header>
@@ -123,13 +121,9 @@
     <section class="page-section" id="tentang">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase">Tentang Blora</h2>
-                <h3 class="section-subheading text-muted">Kabupaten Blora, merupakan salah satu kabupaten yang ada di
-                    Provinsi Jawa Tengah. Menurut kisah rakyat yang berkembang di Kabupaten Blora, kata blora berasal
-                    dari kata belor yang artinya lumpur, kemudian kata tersebut berkembang menjadi mbloran, dan sekarang
-                    dikenal sebagai blora. Sedangkan menurut etimologi dari pakar bahasa, kata blora berasal dari kata
-                    wei + lorah. Wai artinya air dan lorah artinya tanah rendah atau rendah. Secara umum, nama Blora
-                    berarti tanah rendah air atau tanah berlumpur.</h3>
+                <h1 class="section-heading text-uppercase">Tentang</h1>
+                <h2 class="section-heading text-uppercase">Labirin Pogung</h2>
+                <h3 class="section-subheading text-muted">WebGIS Labirin Pogung adalah sebuah aplikasi web yang memungkinkan pengguna untuk memvisualisasikan dan berinteraksi dengan data spasial yang terkait dengan labirin Pogung. Sistem ini berguna untuk mencari jalan alternatif ketika portal masuk ke labirin ditutup atau tidak dapat diakses.</h3>
             </div>
             {{-- <div class="row text-center">
                 <div class="col-md-4">
@@ -174,7 +168,7 @@
                         dengan kebaikan. Hingga saat ini, Tari
                         Barongan masih dipertahankan oleh masyarakat setempat.</p>
                 </div> --}}
-            </div>
+        </div>
         </div>
     </section>
 
@@ -188,7 +182,7 @@
             <div class="row">
                 <div class="align-items-center">
                     <div class="team-member text-center">
-                        <img class="mx-auto rounded-circle img-fluid" src="img/profil.jpeg"
+                        <img class="mx-auto rounded-circle img-fluid" src="/storage/images/profil.jpeg"
                             alt="Trisna Diah Ayu Wulandari" style="width: 200px; height: 200px;" />
                         <h4>Trisna Diah Ayu Wulandari</h4>
                         <p class="text-muted">22/505883/SV/21979</p>
