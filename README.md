@@ -18,7 +18,5 @@ Sumber data yang digunakan yaitu dari google maps yang menampilkan daerah Pogung
 
 Tangkapan layar komponen:  
 </h4> 
-  <img src="/storage/app/public/images/landing.jpeg" alt="landing" width="400"/>
-  <img src="/storage/app/public/images/peta.jpeg" alt="peta" width="400"/>
-
-https://vscode.dev/github/trisnawulan/pgwl/blob/main/storage/app/public/images/peta.jpeg
+![alt text](image.png)
+![alt text](image-1.png)
