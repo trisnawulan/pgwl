@@ -14,6 +14,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Coordinates</th>
 
                             <th>Image</th>
                             <th>Created at</th>
@@ -28,6 +29,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->name }}</td>
                                 <td>{{ $p->description }}</td>
+                                <td>{{ $geometry->coordinates[1] . ',' . $geometry->coordinates[0] }}</td>
 
                                 <td>
                                     <img src="{{ asset('storage/images/' . $p->image) }}" alt="" width="200">
